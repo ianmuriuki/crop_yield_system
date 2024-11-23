@@ -1,0 +1,43 @@
+type Crop = record {
+  id : nat64;
+  ph_level : float64;
+  infection_monitoring : vec record { text; text };
+  actual_yield : float64;
+  weather_conditions : text;
+  pest_and_disease_details : vec record { text; text };
+  planting_date : text;
+  soil_quality : vec record { text; text };
+  field_location : text;
+  expected_yield : float64;
+  expected_rainfall : float64;
+  crop_type : text;
+  variety : text;
+};
+service : {
+  create_crop : (
+      nat64,
+      text,
+      text,
+      text,
+      text,
+      text,
+      float64,
+      float64,
+      vec record { text; text },
+      vec record { text; text },
+      vec record { text; text },
+      float64,
+      float64,
+    ) -> (Crop);
+  delete_crop : (nat64) -> (opt Crop);
+  get_crop_details : (nat64) -> (opt Crop) query;
+  update_crop_details : (
+      nat64,
+      float64,
+      vec record { text; text },
+      vec record { text; text },
+      vec record { text; text },
+      float64,
+      float64,
+    ) -> (opt Crop);
+}

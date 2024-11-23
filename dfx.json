@@ -1,0 +1,11 @@
+{
+  "version": 1,
+  "canisters": {
+    "crop_yield_backend": {
+      "type": "rust",
+      "package": "crop_yield_backend",
+      "candid": "src/crop_yield_backend/crop_yield_backend.did"
+    }
+  },
+  "output_env_file": ".env"
+}
