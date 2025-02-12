@@ -1,9 +1,17 @@
+type Application = record {
+  date : text;
+  product_name : text;
+  quantity : float64;
+};
 type Crop = record {
   id : nat64;
   ph_level : float64;
   infection_monitoring : vec record { text; text };
   actual_yield : float64;
-  weather_conditions : text;
+  pesticides_application : vec Application;
+  growth_stage : GrowthStage;
+  weather_conditions : WeatherConditions;
+  fertilizer_application : vec Application;
   pest_and_disease_details : vec record { text; text };
   planting_date : text;
   soil_quality : vec record { text; text };
@@ -13,14 +21,27 @@ type Crop = record {
   crop_type : text;
   variety : text;
 };
+type GrowthStage = variant {
+  Germination;
+  Harvesting;
+  Ripening;
+  Fruiting;
+  Vegetative;
+  Planting;
+  Flowering;
+};
+type WeatherConditions = record {
+  temperature : float64;
+  conditions : text;
+  rainfall : float64;
+};
 service : {
   create_crop : (
-      nat64,
       text,
       text,
       text,
       text,
-      text,
+      WeatherConditions,
       float64,
       float64,
       vec record { text; text },
@@ -30,7 +51,14 @@ service : {
       float64,
     ) -> (Crop);
   delete_crop : (nat64) -> (opt Crop);
+  get_all_crops : () -> (vec Crop) query;
   get_crop_details : (nat64) -> (opt Crop) query;
+  get_fertilizer_application : (nat64) -> (opt vec Application) query;
+  get_growth_stage : (nat64) -> (opt GrowthStage) query;
+  get_pesticides_application : (nat64) -> (opt vec Application) query;
+  log_fertilizer_application : (nat64, Application) -> (opt Crop);
+  log_pesticides_application : (nat64, Application) -> (opt Crop);
+  predict_yield : (nat64) -> (opt float64) query;
   update_crop_details : (
       nat64,
       float64,
@@ -40,4 +68,5 @@ service : {
       float64,
       float64,
     ) -> (opt Crop);
+  update_growth_stage : (nat64, GrowthStage) -> (opt Crop);
 }
