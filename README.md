@@ -1,6 +1,44 @@
-# icp_rust_message_board_contract
+# Crop Yield and Harvest Tracking System
 
-### Requirements
+### Introduction
+
+This is a system designed to manage and track crop yields, growth stages, weather conditions and applications of fertilizers and pestcides. Its a Rust Smart Contract intended to run on the Internet Computer Protocol blockchain layer. 
+
+### Features
+
+#### 1. Crop Management
+
+  * `Create new crop entries with details like crop type, variety, field location, planting date, and expected yield.`
+  * `Update crop details such as actual yield, infection monitoring, pest and disease details, soil quality, and pH level.`
+  * `Delete crop entries.`
+
+#### 2. Growth Stage Tracking
+
+  * `Track the growth stage of crops (e.g., Planting, Germination, Vegetative, Flowering, Fruiting, Ripening, Harvesting).`
+  * `Update and query the current growth stage of a crop.`
+
+#### 3. Fertilizer and Pesticide Application Tracking
+
+  * `Log applications of fertilizers and pesticides for each crop.`
+  * `Retrieve application details for a specific crop.`
+
+#### 4. Weather Conditions
+
+  * `Track weather conditions (e.g., rainfall, temperature) for each crop.`
+
+#### 5. Yield Prediction
+
+  * `Predict crop yield based on factors like weather conditions, soil quality, fertilizer usage, and pesticide usage.`
+
+#### 6. Data Storage
+
+  * `Store crop data in a thread-safe, mutable `HashMap` using `RefCell` for internal mutability.`
+
+
+## Prerequisites
+
+Before running the project, ensure you have the following installed:
+
 * rustc 1.64 or higher
 ```bash
 $ curl --proto '=https' --tlsv1.2 https://sh.rustup.rs -sSf | sh
@@ -22,59 +60,10 @@ $ source ~/.bashrc
 $ dfx start --background
 ```
 
-If you want to start working on your project right away, you might want to try the following commands:
-
-```bash
-$ cd icp_rust_boilerplate/
-$ dfx help
-$ dfx canister --help
-```
-
-## Update dependencies
-
-update the `dependencies` block in `/src/{canister_name}/Cargo.toml`:
-```
-[dependencies]
-candid = "0.9.9"
-ic-cdk = "0.11.1"
-serde = { version = "1", features = ["derive"] }
-serde_json = "1.0"
-ic-stable-structures = { git = "https://github.com/lwshang/stable-structures.git", branch = "lwshang/update_cdk"}
-```
-
-## did autogenerate
-
-Add this script to the root directory of the project:
-```
-https://github.com/buildwithjuno/juno/blob/main/scripts/did.sh
-```
-
-Update line 16 with the name of your canister:
-```
-https://github.com/buildwithjuno/juno/blob/main/scripts/did.sh#L16
-```
-
-After this run this script to generate Candid.
-Important note!
-
-You should run this script each time you modify/add/remove exported functions of the canister.
-Otherwise, you'll have to modify the candid file manually.
-
-Also, you can add package json with this content:
-```
-{
-    "scripts": {
-        "generate": "./did.sh && dfx generate",
-        "gen-deploy": "./did.sh && dfx generate && dfx deploy -y"
-      }
-}
-```
-
-and use commands `npm run generate` to generate candid or `npm run gen-deploy` to generate candid and to deploy a canister.
 
 ## Running the project locally
 
-If you want to test your project locally, you can use the following commands:
+If you want to test the project locally, you can use the following commands:
 
 ```bash
 # Starts the replica, running in the background
